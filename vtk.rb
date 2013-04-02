@@ -14,6 +14,7 @@ class Vtk < Formula
     depends_on  'pyqt'
   end
 
+  option :universal
   option 'examples',  'Compile and install various examples'
   option 'python',    'Enable python wrapping of VTK classes'
   option 'pyqt',      'Make python wrapped classes available to SIP/PyQt'
@@ -28,6 +29,7 @@ class Vtk < Formula
   end
 
   def install
+    ENV.universal_binary if build.universal?
     args = std_cmake_args + %W[
       -DVTK_REQUIRED_OBJCXX_FLAGS=''
       -DVTK_USE_CARBON=OFF

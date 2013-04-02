@@ -15,6 +15,7 @@ class Opencv < Formula
 
   env :std # to find python
 
+  option :universal
   option '32-bit'
   option 'with-qt',  'Build the Qt4 backend to HighGUI'
   option 'with-tbb', 'Enable parallel code in OpenCV using Intel TBB'
@@ -42,6 +43,7 @@ class Opencv < Formula
   def install
     args = std_cmake_args + %w[
       -DCMAKE_OSX_DEPLOYMENT_TARGET=
+      -DWITH_OPENNI=ON
       -DWITH_CUDA=OFF
       -DBUILD_ZLIB=OFF
       -DBUILD_TIFF=OFF
@@ -91,6 +93,7 @@ class Opencv < Formula
     args << "-DPYTHON_PACKAGES_PATH='#{lib}/#{which_python}/site-packages'"
 
     args << '..'
+    ENV.universal_binary if build.universal?
     mkdir 'macbuild' do
       system 'cmake', *args
       system "make"

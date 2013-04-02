@@ -1,9 +1,8 @@
 require 'formula'
 
-class Qhull < Formula
+class Qhull2011 < Formula
   homepage 'http://www.qhull.org/'
-  url 'http://www.qhull.org/download/qhull-2012.1-src.tgz'
-  sha1 '60f61580e1d6fbbd28e6df2ff625c98d15b5fbc6'
+  head 'git://github.com/rtkg/Qhull-2011.2.git'
 
   depends_on 'cmake' => :build
   option :universal

@@ -8,6 +8,7 @@ class Flann < Formula
   option 'enable-python', 'Enable python bindings'
   option 'enable-matlab', 'Enable matlab/octave bindings'
   option 'with-examples', 'Build and install example binaries'
+  option :universal
 
   depends_on 'cmake' => :build
   depends_on 'hdf5'
@@ -16,6 +17,7 @@ class Flann < Formula
   depends_on 'numpy' => :python if build.include? 'enable-python'
 
   def install
+    ENV.universal_binary if build.universal?
     args = std_cmake_args
     if build.include? 'enable-matlab'
       args << '-DBUILD_MATLAB_BINDINGS:BOOL=ON'
